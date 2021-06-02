@@ -23,6 +23,7 @@ SUPPRESS_WARNINGS=false # Suppress warnings
 LOCK_FILE="" # Optional lock file to acquire to ensure two backups don't run at once
 LOCK_FILE_TIMEOUT="" # Optional lock file wait timeout (in seconds)
 WINDOW_MANAGER="screen" # Choices: screen, tmux, RCON
+RESTIC_ADDITIONAL_OPTIONS=""
 
 # Other Variables (do not modify)
 DATE_FORMAT="%F_%H-%M-%S"
@@ -67,6 +68,7 @@ while getopts 'a:cd:e:f:hi:l:m:o:p:qr:s:t:u:vw:' FLAG; do
        echo "-u    Lock file timeout seconds (empty = unlimited)"
        echo "-v    Verbose mode"
        echo "-w    Window manager: screen (default), tmux, RCON"
+       echo "-x    Restic additional flags (if using restic)"
        exit 0
        ;;
     i) SERVER_WORLD=$OPTARG ;;
@@ -81,6 +83,7 @@ while getopts 'a:cd:e:f:hi:l:m:o:p:qr:s:t:u:vw:' FLAG; do
     u) LOCK_FILE_TIMEOUT=$OPTARG ;;
     v) DEBUG=true ;;
     w) WINDOW_MANAGER=$OPTARG ;;
+    x) RESTIC_ADDITIONAL_OPTIONS=$OPTARG ;;
     *) log-fatal "Invalid option -$FLAG"; exit 1 ;;
   esac
 done
